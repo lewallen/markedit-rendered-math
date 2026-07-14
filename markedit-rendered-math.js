@@ -11,6 +11,34 @@ const {
 const { EditorSelection, StateEffect, StateField } = MarkEdit.codemirror.state;
 const { ensureSyntaxTree, syntaxTree } = MarkEdit.codemirror.language;
 
+// Edit this object to add or change MathJax macros for the standalone extension.
+const embeddedSettings = {
+    shared: {
+        mathJaxUrl: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js",
+        mathJax: {
+            tex: {
+                macros: {
+                    C: "\\mathbb{C}",
+                    N: "\\mathbb{N}",
+                    Q: "\\mathbb{Q}",
+                    R: "\\mathbb{R}",
+                    Z: "\\mathbb{Z}"
+                }
+            }
+        }
+    },
+    inlineMathPreview: {
+        inlineYOffset: "0em",
+        inlineStrut: "\\vphantom{(gjpqy}"
+    },
+    blockMathPreviewExperiment: {
+        replaceSourceWhenInactive: true,
+        hideSourceWhenInactive: false,
+        hidePreviewWhenCursorInside: true,
+        hideNativePreviewButton: true
+    }
+};
+
 let settings = buildMathPreviewSettings();
 
 let mathJaxPromise;
@@ -626,6 +654,9 @@ function buildMathPreviewSettings() {
             inlineYOffset: "0em",
             inlineStrut: "\\vphantom{(gjpqy}"
         },
+        sharedPreferences(embeddedSettings),
+        embeddedSettings.inlineMathPreview || {},
+        embeddedSettings.blockMathPreviewExperiment || {},
         sharedPreferences(preferences),
         preferences.inlineMathPreview || {},
         preferences.blockMathPreviewExperiment || {},
