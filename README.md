@@ -13,3 +13,5 @@ Inline math uses `$...$`. Display math uses `$$...$$`, including multiline block
 Edit `markedit-rendered-math-settings.js` to add MathJax macros under `shared.mathJax.tex.macros`, then restart MarkEdit.
 
 Requires MarkEdit's JavaScript extension API. MathJax is loaded from jsDelivr.
+
+Note: Developed with the help of OpenAI Codex. 
